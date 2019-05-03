@@ -11,9 +11,9 @@ First Bot:
 Says hello back to whoever types "!hello" in the chat while the bot is active.  
 
 Second Bot:  
-%eight_ball = Responds to a question like a magic eight ball  
-%coin_flip = Flips a coin (returns heads or tails)  
-%square X = squares the number X  
+?eight_ball = Responds to a question like a magic eight ball  
+?coin_flip = Flips a coin (returns heads or tails)  
+?square X = squares the number X  
 
 Third Bot:  
 %join X = Bot joins X voice channel  
