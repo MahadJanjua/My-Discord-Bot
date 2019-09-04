@@ -1,9 +1,3 @@
-
-
-.o
-.word
-.ppt
-.docx
 *.o
 *.docx
 !bruh.docx
