@@ -6,3 +6,4 @@
 .docx
 *.o
 *.docx
+!bruh.docx
