@@ -18,16 +18,16 @@ class CustomClient(discord.Client):
             response = "Hi " + str(message.author).split("#", 1)[0] + "!"
             await message.channel.send(response)
     
-    async def eight_ball(self, context):
-        possible_responses1 = [
-            'That is a resounding no',
-            'It does not looking likely',
-            'Too hard to tell',
-            'It is quite possible',
-            'Definitely',
-            'Ask Mahad',
-        ]
-        await client.say(random.choice(possible_responses1) + ", " + context.message.author.mention)
+    # async def eight_ball(self, context):
+    #     possible_responses1 = [
+    #         'That is a resounding no',
+    #         'It does not looking likely',
+    #         'Too hard to tell',
+    #         'It is quite possible',
+    #         'Definitely',
+    #         'Ask Mahad',
+    #     ]
+    #     await client.say(random.choice(possible_responses1) + ", " + context.message.author.mention)
 
 client = CustomClient()
 client.run(TOKEN)
