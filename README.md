@@ -24,3 +24,7 @@ Third Bot:
 %resume = Resumes audio  
 %stop = Leaves voice channel altogether  
 %skip = Skips current video and goes to the next  
+  
+# Requirements
+pip install discord.py  
+pip install python-dotenv

@@ -1,3 +1,4 @@
 *.o
 *.docx
 !bruh.docx
+.env
