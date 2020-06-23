@@ -2,3 +2,4 @@
 *.docx
 !bruh.docx
 .env
+cogs/__pycache__
