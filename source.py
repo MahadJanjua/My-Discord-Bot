@@ -14,9 +14,11 @@ class CustomClient(discord.Client):
     async def on_message(self, message):
         if message.author == client.user:
             return
-        if message.content == '$hello':
-            response = "Hi " + str(message.author).split("#", 1)[0] + "!"
+        if message.content == '$hello' or message.content == '$mallo':
+            response = str(message.content).replace("$", "") + str(message.author).split("#", 1)[0] + "!"
             await message.channel.send(response)
+        elif str(message.content).lower() == 'mwo':
+            await message.channel.send('mwo')
     
     # async def eight_ball(self, context):
     #     possible_responses1 = [
