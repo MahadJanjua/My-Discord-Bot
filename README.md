@@ -27,4 +27,5 @@ Third Bot:
   
 # Requirements
 pip install discord.py  
-pip install python-dotenv
+pip install python-dotenv --> For holding token  
+pip install PyNaCl --> For voice  

@@ -8,6 +8,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 EXTENSIONS = (
     'cogs.Basics',
+    'cogs.Voice',
 )
 
 class YummyBot(commands.Bot):

@@ -1,7 +1,6 @@
 import discord
 import random
 from discord.ext import commands
-from datetime import datetime
 
 class Basics(commands.Cog):
 
