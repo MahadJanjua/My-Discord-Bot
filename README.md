@@ -29,3 +29,4 @@ Third Bot:
 pip install discord.py  
 pip install python-dotenv --> For holding token  
 pip install PyNaCl --> For voice  
+pip install youtube_dl --> For getting youtube audio  
