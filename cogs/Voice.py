@@ -57,6 +57,7 @@ class Voice(commands.Cog):
     
     @commands.command(name = 'play', aliases=['pl', 'p'], pass_context=True)
     async def play(self, ctx, url: str):
+        self.join(self, ctx)
         if self.last_audio == url:
             source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio("song.mp3"))
             ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
