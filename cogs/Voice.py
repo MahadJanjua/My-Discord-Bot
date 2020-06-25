@@ -45,7 +45,7 @@ class Voice(commands.Cog):
         source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(random.choice(mwos)))
         ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
     
-    @commands.command(pass_context=True)
+    @commands.command(aliases=['kebin', 'kebeen', 'gebin', 'gebeen', 'kai', 'gaybean', 'kaiwen', 'clasdfer'], pass_context=True)
     async def kevin(self, ctx):
         kevins = [
             'extra/kevin/kevin1.mp4',
