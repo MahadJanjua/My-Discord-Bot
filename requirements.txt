@@ -1,0 +1,5 @@
+git+https://github.com/MahadJanjua/My-Discord-Bot@master
+discord.py
+youtube_dl
+PyNaCl
+python-dotenv
