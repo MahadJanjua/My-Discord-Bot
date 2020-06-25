@@ -11,6 +11,7 @@ class Voice(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.last_audio = None
 
 
     @commands.command(pass_context=True)
@@ -36,35 +37,79 @@ class Voice(commands.Cog):
     @commands.command(name = 'mwo', pass_context=True)
     async def mwo(self, ctx):
         mwos = [
-            'extra/mwo1.mp3',
-            'extra/mwo2.mp3',
-            'extra/mwo3.mp3'
+            'extra/mwos/mwo1.mp3',
+            'extra/mwos/mwo2.mp3',
+            'extra/mwos/mwo3.mp3'
         ]
 
-        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(executable="extra/ffmpeg.exe", source=random.choice(mwos)))
+        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(random.choice(mwos)))
+        ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+    
+    @commands.command(pass_context=True)
+    async def kevin(self, ctx):
+        kevins = [
+            'extra/kevin/kevin1.mp4',
+            'extra/kevin/kevin2.mp4',
+        ]
+
+        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(random.choice(kevins)))
         ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
     
     @commands.command(name = 'play', aliases=['pl', 'p'], pass_context=True)
     async def play(self, ctx, url: str):
-        for file in os.listdir("./"):
-            if file == "song.mp3":
-                os.remove("song.mp3")
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-        }
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
-        for file in os.listdir("./"):
-            if file.endswith(".mp3"):
-                os.rename(file, 'song.mp3')
-        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio("song.mp3"))
-        ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+        if self.last_audio == url:
+            source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio("song.mp3"))
+            ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+        else:
+            self.last_audio = url
+            for file in os.listdir("./"):
+                if file == "song.mp3":
+                    os.remove("song.mp3")
+            ydl_opts = {
+                'format': 'bestaudio/best',
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+                }],
+            }
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+            for file in os.listdir("./"):
+                if file.endswith(".mp3"):
+                    os.rename(file, 'song.mp3')
+            source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio("song.mp3"))
+            ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
 
+    @commands.command(pass_context=True)
+    async def pause(self, ctx):
+        voice = get(self.client.voice_clients, guild=ctx.guild)
+
+        if voice and voice.is_playing():
+            voice.pause()
+            await ctx.send("Paused the music :pause_button:")
+        else:
+            await ctx.send("No music is playing!")
+
+    @commands.command(pass_context=True)
+    async def resume(self, ctx):
+        voice = get(self.client.voice_clients, guild=ctx.guild)
+
+        if voice and voice.is_paused():
+            voice.resume()
+            await ctx.send("Resuming music :notes:")
+        else:
+            await ctx.send("No music to resume!")
+    
+    @commands.command(pass_context=True)
+    async def stop(self, ctx):
+        voice = get(self.client.voice_clients, guild=ctx.guild)
+
+        if voice and voice.is_playing():
+            voice.stop()
+            await ctx.send("Music stopped :stop_button:")
+        else:
+            await ctx.send("No music is currently playing!")
 
 
 
