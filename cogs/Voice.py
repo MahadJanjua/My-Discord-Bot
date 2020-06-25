@@ -6,6 +6,7 @@ from discord.ext import commands
 from discord.voice_client import VoiceClient
 from discord.utils import get
 from discord import FFmpegPCMAudio
+from .utils.opus_loader import load_opus_lib
 
 class Voice(commands.Cog):
 
@@ -115,4 +116,5 @@ class Voice(commands.Cog):
 
 
 def setup(client):
+    load_opus_lib()
     client.add_cog(Voice(client))
