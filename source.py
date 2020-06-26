@@ -9,6 +9,7 @@ TOKEN = os.getenv('BOT_TOKEN')
 EXTENSIONS = (
     'cogs.Basics',
     'cogs.Voice',
+    'cogs.ImageClassify'
 )
 
 class YummyBot(commands.Bot):
